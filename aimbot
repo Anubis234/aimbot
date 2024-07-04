@@ -134,6 +134,12 @@ local function getClosestPlayer()
     return closestPlayer
 end
 
+local function useSkill(targetPosition)
+    -- Replace this with the actual skill use function in your game
+    print("Using skill at position:", targetPosition)
+    -- Example: LocalPlayer.Character:FindFirstChild("Skill"):Activate(targetPosition)
+end
+
 local function toggleAimbot()
     aimbotEnabled = not aimbotEnabled
 end
@@ -196,7 +202,7 @@ local function toggleESP()
         Players.PlayerAdded:Connect(createESP)
         Players.PlayerRemoving:Connect(removeESP)
     else
-        for _, player in ipairs(Players:GetPlayers()) do
+        for player, objects in pairs(espObjects) do
             removeESP(player)
         end
     end
@@ -222,9 +228,7 @@ UserInputService.InputBegan:Connect(function(input)
     if input.UserInputType == Enum.UserInputType.MouseButton2 and aimbotEnabled then
         local closestPlayer = getClosestPlayer()
         if closestPlayer and closestPlayer.Character and closestPlayer.Character:FindFirstChild("HumanoidRootPart") then
-            -- Assuming the skill function is 'useSkill'
             local targetHRP = closestPlayer.Character.HumanoidRootPart
-            -- This part depends on how skills are used in your game
             useSkill(targetHRP.Position)
         end
     end
