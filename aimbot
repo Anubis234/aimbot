@@ -216,11 +216,7 @@ local function toggleESP()
 end
 
 local function updatePlayerList()
-    for _, child in ipairs(PlayerList:GetChildren()) do
-        if child:IsA("TextButton") then
-            child:Destroy()
-        end
-    end
+    PlayerList:ClearAllChildren()
 
     for _, player in ipairs(Players:GetPlayers()) do
         local playerButton = Instance.new("TextButton")
